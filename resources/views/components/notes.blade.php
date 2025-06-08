@@ -1111,13 +1111,13 @@ function renderNotesList() {
 }
 
 function saveToLocalStorage() {
-    localStorage.setItem('learnhub_notes', JSON.stringify(notes));
-    localStorage.setItem('learnhub_categories', JSON.stringify(categories));
+    localStorage.setItem('notex_notes', JSON.stringify(notes));
+    localStorage.setItem('notex_categories', JSON.stringify(categories));
 }
 
 function loadFromLocalStorage() {
-    const savedNotes = localStorage.getItem('learnhub_notes');
-    const savedCategories = localStorage.getItem('learnhub_categories');
+    const savedNotes = localStorage.getItem('notex_notes');
+    const savedCategories = localStorage.getItem('notex_categories');
     
     if (savedNotes) {
         notes = JSON.parse(savedNotes);

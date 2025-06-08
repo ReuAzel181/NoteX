@@ -2,7 +2,7 @@
 <main class="main-content">
     <div id="dashboard-content">
         <div class="dashboard-header">
-            <p>Welcome to LearnHub! Select a tool to get started.</p>
+            <p>Welcome to NoteX! Select a tool to get started.</p>
         </div>
 
         <div class="action-buttons">

@@ -64,4 +64,4 @@ function updateActiveNavItem() {
 
 document.addEventListener('DOMContentLoaded', updateActiveNavItem);
 window.addEventListener('popstate', updateActiveNavItem);
-</script> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/navigation.blade.php ENDPATH**/ ?>
+</script> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/navigation.blade.php ENDPATH**/ ?>

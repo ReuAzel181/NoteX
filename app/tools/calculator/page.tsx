@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useState } from 'react'
 import { DashboardNav } from '@/components/dashboard-nav'
 import { Button } from '@/components/ui/button'
-import { History, RefreshCcw, X } from 'lucide-react'
+import { History, RefreshCcw, X, Sparkles } from 'lucide-react'
 
 export default function CalculatorPage() {
   const [display, setDisplay] = useState('0')
@@ -80,42 +80,60 @@ export default function CalculatorPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <DashboardNav />
       <main className="container mx-auto p-4 md:p-8">
         <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Scientific Calculator</h1>
-            <p className="text-muted-foreground">Perform complex calculations</p>
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <Sparkles className="h-8 w-8 text-purple-500" />
+              <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-sm"></div>
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                Scientific Calculator
+              </h1>
+              <p className="text-muted-foreground">Advanced mathematical computations</p>
+            </div>
           </div>
           <div className="flex gap-4">
             <Button 
               variant={showHistory ? "default" : "outline"} 
               size="icon"
               onClick={() => setShowHistory(!showHistory)}
+              className={`${showHistory ? 'bg-gradient-to-r from-purple-500 to-indigo-600' : 'border-white/20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-700/70'} transition-all duration-300`}
             >
               <History className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" onClick={() => setDisplay('0')}>
+            <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={() => setDisplay('0')}
+              className="border-white/20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300"
+            >
               <RefreshCcw className="h-4 w-4" />
             </Button>
           </div>
         </div>
         
-        <div className="flex gap-6">
+        <div className="flex gap-8">
           <div className="flex-1 max-w-md">
-            <div className="bg-card border rounded-lg p-4">
-              <div className="bg-muted p-4 rounded mb-4 text-right text-2xl font-mono overflow-x-auto">
+            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+              <div className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-slate-700 dark:to-slate-600 p-6 rounded-xl mb-6 text-right text-3xl font-mono overflow-x-auto border border-white/20">
                 {display}
               </div>
               
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-6 gap-3">
                 {buttons.map((row, i) => (
                   row.map((btn, j) => (
                     <Button
                       key={`${i}-${j}`}
                       variant="outline"
-                      className="h-12 text-sm md:text-base"
+                      className={`h-14 text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 ${
+                        btn === '=' ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white hover:from-purple-600 hover:to-indigo-700' :
+                        btn === 'C' ? 'bg-gradient-to-r from-red-500 to-pink-600 text-white hover:from-red-600 hover:to-pink-700' :
+                        'border-white/20 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-600/70'
+                      }`}
                       onClick={() => handleClick(btn)}
                     >
                       {btn}
@@ -127,30 +145,35 @@ export default function CalculatorPage() {
           </div>
 
           {showHistory && (
-            <div className="w-72 bg-card border rounded-lg p-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold">History</h2>
+            <div className="w-80 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-xl transition-all duration-300">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
+                  History
+                </h2>
                 <Button 
                   variant="ghost" 
                   size="icon"
                   onClick={() => setHistory([])}
+                  className="text-gray-500 hover:text-red-500 transition-colors duration-200 p-2 rounded-lg hover:bg-red-500/10"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-3 max-h-[60vh] overflow-y-auto">
                 {history.map((item, index) => (
                   <div 
                     key={index} 
-                    className="text-sm p-2 hover:bg-muted rounded cursor-pointer"
+                    className="text-sm p-3 hover:bg-white/50 dark:hover:bg-slate-700/50 rounded-xl cursor-pointer transition-all duration-200 hover:scale-105 border border-transparent hover:border-white/20"
                     onClick={() => setDisplay(item.split(' = ')[1])}
                   >
-                    {item}
+                    <div className="font-mono text-gray-800 dark:text-gray-200">{item}</div>
                   </div>
                 ))}
                 {history.length === 0 && (
-                  <div className="text-center text-muted-foreground text-sm p-4">
-                    No calculations yet
+                  <div className="text-center text-muted-foreground p-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm">
+                    <div className="text-4xl mb-4">🧮</div>
+                    <p className="text-lg font-medium mb-2">No calculations yet</p>
+                    <p className="text-sm">Start computing to see your history</p>
                   </div>
                 )}
               </div>

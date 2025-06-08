@@ -506,4 +506,4 @@ function loadGalleryFromLocalStorage() {
 
 // Initialize gallery on load
 document.addEventListener('DOMContentLoaded', loadGalleryFromLocalStorage);
-</script> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/draw.blade.php ENDPATH**/ ?>
+</script> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/draw.blade.php ENDPATH**/ ?>

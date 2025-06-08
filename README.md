@@ -1,34 +1,36 @@
-# LearnHub - Student Productivity Suite
+# NoteX - Futuristic Note-Taking Suite
 
-LearnHub is an all-in-one productivity app designed for high school and college students. It combines essential study tools into a clean, minimalist interface with a focus on accessibility and offline functionality.
+NoteX is a cutting-edge, all-in-one productivity app designed for modern students and professionals. It combines essential study tools into a sleek, futuristic interface with smooth animations and advanced features, focusing on accessibility and seamless user experience.
 
 ## Features
 
+- 🚀 Futuristic UI with smooth animations
 - 📱 Mobile-first, responsive design
-- 🌓 Dark mode support
-- 🔄 Offline functionality
-- 🎯 Study-focused tools:
+- 🌓 Dark mode support with dynamic theming
+- ⚡ Lightning-fast performance
+- 🎯 Advanced study tools:
+  - Smart Notes with AI assistance
+  - Digital Canvas for drawing
   - Scientific Calculator
-  - Distraction-free Notepad
-  - Calendar & Reminders
-  - Flashcards with Spaced Repetition
-  - Group Chat
-  - Pomodoro Timer
+  - Intelligent Dictionary
+  - Real-time collaboration
+  - Advanced search capabilities
 
 ## Tech Stack
 
 - Next.js 14 with TypeScript
-- Tailwind CSS for styling
+- Tailwind CSS with custom animations
 - Radix UI for accessible components
-- Next-themes for dark mode
+- Next-themes for dynamic theming
+- Framer Motion for smooth animations
 - Zustand for state management
 
 ## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/learnhub.git
-cd learnhub
+git clone https://github.com/yourusername/notex.git
+cd notex
 ```
 
 2. Install dependencies:
@@ -58,4 +60,4 @@ Author: **ReuAzel181**
 
 Email: **reyuasel@gmail.com**
 
-Thank you for checking out the Iconifier project!
+Thank you for checking out the NoteX project!

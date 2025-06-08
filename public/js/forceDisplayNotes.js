@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a direct note
         const demoNotes = [
             {
-                title: 'Welcome to LearnHub',
+                title: 'Welcome to NoteX',
                 content: 'This is a sample note injected directly into the DOM.',
                 date: new Date().toLocaleString()
             },

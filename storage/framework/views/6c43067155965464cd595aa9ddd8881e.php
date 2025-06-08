@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnHub</title>
+    <title>NoteX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
@@ -124,7 +124,7 @@
 
         <main class="main-content">
             <div class="header">
-                <h1>LearnHub</h1>
+                <h1>NoteX</h1>
                 <div class="search-bar">
                     <input type="text" placeholder="Search for anything...">
                 </div>
@@ -145,4 +145,4 @@
         </main>
     </div>
 </body>
-</html> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+</html> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/layouts/app.blade.php ENDPATH**/ ?>

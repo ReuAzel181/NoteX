@@ -7,7 +7,7 @@
 
 const NoteStorage = {
     // Key used in localStorage
-    STORAGE_KEY: 'learnhub_notes',
+    STORAGE_KEY: 'notex_notes',
     
     /**
      * Get all notes from storage

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import { DashboardNav } from '@/components/dashboard-nav'
 import { Button } from '@/components/ui/button'
-import { Download, Eraser, Circle, Square, Pencil, Type, Undo, Redo } from 'lucide-react'
+import { Download, Eraser, Circle, Square, Pencil, Type, Undo, Redo, Sparkles } from 'lucide-react'
 
 export default function DrawPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -103,27 +103,35 @@ export default function DrawPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <DashboardNav />
       <main className="container mx-auto p-4 md:p-8">
         <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Drawing Board</h1>
-            <p className="text-muted-foreground">Create diagrams and sketches</p>
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <Sparkles className="h-8 w-8 text-emerald-500" />
+              <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-sm"></div>
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                Digital Canvas
+              </h1>
+              <p className="text-muted-foreground">Create stunning digital artwork</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex gap-2">
+            <div className="flex gap-2 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-2 rounded-xl border border-white/20">
               {colors.map((c) => (
                 <button
                   key={c}
-                  className={`w-6 h-6 rounded-full border ${color === c ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                  className={`w-8 h-8 rounded-full border-2 border-white/20 transition-all duration-300 hover:scale-110 ${color === c ? 'ring-2 ring-emerald-500 ring-offset-2 scale-110' : 'hover:ring-2 hover:ring-emerald-500/50'}`}
                   style={{ backgroundColor: c }}
                   onClick={() => setColor(c)}
                 />
               ))}
             </div>
             <select
-              className="px-2 py-1 border rounded"
+              className="px-4 py-2 border border-white/20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-transparent transition-all duration-300"
               value={size}
               onChange={(e) => setSize(Number(e.target.value))}
             >
@@ -133,7 +141,7 @@ export default function DrawPage() {
                 </option>
               ))}
             </select>
-            <div className="flex gap-2">
+            <div className="flex gap-2 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-2 rounded-xl border border-white/20">
               {[
                 { name: 'pencil', icon: Pencil },
                 { name: 'eraser', icon: Eraser },
@@ -146,29 +154,30 @@ export default function DrawPage() {
                   variant={tool === t.name ? "default" : "outline"}
                   size="icon"
                   onClick={() => setTool(t.name as typeof tool)}
+                  className={`${tool === t.name ? 'bg-gradient-to-r from-emerald-500 to-green-600' : 'border-white/20 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-600/70'} transition-all duration-300 hover:scale-105`}
                 >
                   <t.icon className="h-4 w-4" />
                 </Button>
               ))}
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="icon">
+            <div className="flex gap-2 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-2 rounded-xl border border-white/20">
+              <Button variant="outline" size="icon" className="border-white/20 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-600/70 transition-all duration-300 hover:scale-105">
                 <Undo className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="border-white/20 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-600/70 transition-all duration-300 hover:scale-105">
                 <Redo className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon" onClick={downloadCanvas}>
+              <Button variant="outline" size="icon" onClick={downloadCanvas} className="border-white/20 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-slate-600/70 transition-all duration-300 hover:scale-105">
                 <Download className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </div>
         
-        <div className="bg-card border rounded-lg p-4">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
           <canvas
             ref={canvasRef}
-            className="w-full h-[60vh] border rounded cursor-crosshair bg-white"
+            className="w-full h-[70vh] border border-white/20 rounded-xl cursor-crosshair bg-white shadow-inner"
             onMouseDown={startDrawing}
             onMouseMove={draw}
             onMouseUp={stopDrawing}

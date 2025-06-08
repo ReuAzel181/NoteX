@@ -162,4 +162,4 @@ function displayDefinitions(data) {
     color: #7f8c8d;
     padding: 2rem;
 }
-</style> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/dictionary.blade.php ENDPATH**/ ?>
+</style> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/dictionary.blade.php ENDPATH**/ ?>

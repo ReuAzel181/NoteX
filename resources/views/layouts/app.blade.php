@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'LearnHub') }}</title>
+    <title>{{ config('app.name', 'NoteX') }}</title>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
                 if (notes.length === 0) {
                     console.log('Creating test note for demo purposes');
                     NoteStorage.addNote({
-                        title: 'Welcome to LearnHub Notes',
+                        title: 'Welcome to NoteX Notes',
                         content: '<p>This is your first note. You can edit this note or create new ones using the Notes tool.</p><p>Notes you create will appear on the dashboard for quick access.</p>',
                         date: new Date().toLocaleString()
                     });
@@ -58,7 +58,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">LearnHub</h1>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">NoteX</h1>
                 </div>
 
                 <!-- Navigation -->

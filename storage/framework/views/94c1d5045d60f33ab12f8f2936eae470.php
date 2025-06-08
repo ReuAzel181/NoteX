@@ -1,7 +1,7 @@
 <main class="main-content">
     <div id="dashboard-content">
         <div class="dashboard-header">
-            <p>Welcome to LearnHub! Select a tool to get started.</p>
+            <p>Welcome to NoteX! Select a tool to get started.</p>
         </div>
 
         <div class="action-buttons">
@@ -186,4 +186,4 @@
         padding: 1rem;
     }
 }
-</style> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/layout/main-content.blade.php ENDPATH**/ ?>
+</style> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/layout/main-content.blade.php ENDPATH**/ ?>

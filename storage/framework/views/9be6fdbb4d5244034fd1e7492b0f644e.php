@@ -4,7 +4,7 @@
         <button class="menu-toggle" aria-label="Toggle Sidebar">
             <i class="fas fa-bars"></i>
         </button>
-        <div class="logo">LearnHub</div>
+        <div class="logo">NoteX</div>
     </div>
     
     <div class="search-container">
@@ -622,4 +622,4 @@ main.expanded {
     });
 </script>
 <script src="<?php echo e(asset('js/header.js')); ?>" defer></script>
-<?php $__env->stopPush(); ?> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/header.blade.php ENDPATH**/ ?>
+<?php $__env->stopPush(); ?> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/header.blade.php ENDPATH**/ ?>

@@ -4,7 +4,7 @@
         <button class="menu-toggle" aria-label="Toggle Sidebar">
             <i class="fas fa-bars"></i>
         </button>
-        <div class="logo">LearnHub</div>
+        <div class="logo">NoteX</div>
     </div>
     
     <div class="search-container">
@@ -15,13 +15,60 @@
     </div>
 
     <div class="header-right">
-        <button class="header-icon" aria-label="Notifications" id="notificationBtn">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge">2</span>
-        </button>
-        <button class="header-icon" aria-label="Settings" id="settingsBtn">
-            <i class="fas fa-cog"></i>
-        </button>
+        <div class="notification-wrapper">
+            <button class="header-icon" aria-label="Notifications" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">2</span>
+            </button>
+            <div class="notification-dropdown dropdown-base">
+                <div class="dropdown-header">
+                    <h3>Notifications</h3>
+                    <button class="mark-all-read">Mark all as read</button>
+                </div>
+                <div class="notification-list">
+                    <!-- Notifications will be loaded here via JavaScript -->
+                    <div class="loading-indicator">Loading notifications...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-wrapper">
+            <button class="header-icon" aria-label="Settings" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="settings-dropdown dropdown-base">
+                <div class="dropdown-header">
+                    <h3>Settings</h3>
+                </div>
+                <div class="settings-list">
+                    <a href="/profile" class="settings-item">
+                        <i class="fas fa-user"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                    <a href="/preferences" class="settings-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Preferences</span>
+                    </a>
+                    <a href="/appearance" class="settings-item">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Appearance</span>
+                    </a>
+                    <div class="settings-divider"></div>
+                    <a href="/help" class="settings-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <form action="/logout" method="POST" class="settings-item logout">
+                        @csrf
+                        <button type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <div class="user-profile">
             <div class="user-avatar" 
                  role="button" 
@@ -30,6 +77,34 @@
                  data-username="{{ Auth::user()->name ?? 'Guest' }}"
                  data-email="{{ Auth::user()->email ?? 'guest@example.com' }}">
                 <i class="fas fa-user"></i>
+            </div>
+            <div class="user-dropdown dropdown-base">
+                <div class="user-info">
+                    <div class="user-avatar-large">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h4>{{ Auth::user()->name ?? 'Guest' }}</h4>
+                        <p>{{ Auth::user()->email ?? 'guest@example.com' }}</p>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <a href="/profile" class="user-action-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>View Profile</span>
+                    </a>
+                    <a href="/dashboard" class="user-action-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <form action="/logout" method="POST" class="user-action-item logout">
+                        @csrf
+                        <button type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -242,12 +317,18 @@
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.2s ease;
+    z-index: 1010;
 }
 
 .dropdown-base.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* Position wrappers */
+.notification-wrapper, .settings-wrapper, .user-profile {
+    position: relative;
 }
 
 .dropdown-header {
@@ -532,6 +613,14 @@ main {
 main.expanded {
     margin-left: 0;
 }
+
+/* Loading indicator */
+.loading-indicator {
+    padding: 1rem;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+}
 </style>
 
 @push('scripts')
@@ -539,87 +628,11 @@ main.expanded {
     document.addEventListener('DOMContentLoaded', function() {
         console.log('Header component initialized');
         
-        // Debug logging function
-        function debugLog(action, data = {}) {
-            console.log(`[Header Debug] ${action}:`, data);
-        }
-        
-        // Error logging function
-        function errorLog(action, error) {
-            console.error(`[Header Error] ${action}:`, error);
-            // You can also send this to your server's error logging endpoint
-            fetch('/api/log-error', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({
-                    component: 'header',
-                    action: action,
-                    error: error.message,
-                    stack: error.stack
-                })
-            }).catch(console.error);
-        }
-        
-        try {
-            // Verify all required elements are present
-            const requiredElements = {
-                menuToggle: document.querySelector('.menu-toggle'),
-                searchInput: document.querySelector('.search-input'),
-                notificationBtn: document.getElementById('notificationBtn'),
-                settingsBtn: document.getElementById('settingsBtn'),
-                userProfileBtn: document.getElementById('userProfileBtn')
-            };
-            
-            // Check if any elements are missing
-            Object.entries(requiredElements).forEach(([name, element]) => {
-                if (!element) {
-                    throw new Error(`Required element "${name}" not found`);
-                }
-                debugLog(`Element found`, { name, element });
-            });
-            
-            // Add click event listeners with debug logging
-            requiredElements.notificationBtn.addEventListener('click', () => {
-                debugLog('Notification button clicked');
-            });
-            
-            requiredElements.settingsBtn.addEventListener('click', () => {
-                debugLog('Settings button clicked');
-            });
-            
-            requiredElements.userProfileBtn.addEventListener('click', () => {
-                debugLog('User profile button clicked');
-            });
-            
-            // Test API endpoints
-            async function testEndpoints() {
-                try {
-                    const endpoints = [
-                        { url: '/api/notifications', method: 'GET' },
-                        { url: '/api/search?q=test', method: 'GET' }
-                    ];
-                    
-                    for (const endpoint of endpoints) {
-                        debugLog(`Testing endpoint`, endpoint);
-                        const response = await fetch(endpoint.url);
-                        const data = await response.json();
-                        debugLog(`Endpoint response`, { url: endpoint.url, status: response.status, data });
-                    }
-                } catch (error) {
-                    errorLog('API test failed', error);
-                }
-            }
-            
-            // Run API tests
-            testEndpoints();
-            
-        } catch (error) {
-            errorLog('Header initialization failed', error);
-        }
+        // The functionality for notifications, settings, and profile dropdown
+        // is implemented in the external header.js file.
+        // This ensures we don't have duplicate implementations.
     });
 </script>
-<script src="{{ asset('js/header.js') }}" defer></script>
+<!-- Include header.js using Vite -->
+@vite('resources/js/header.js')
 @endpush 

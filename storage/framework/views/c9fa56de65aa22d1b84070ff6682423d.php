@@ -134,4 +134,4 @@ function calculateResult() {
 .calc-buttons .span-2 {
     grid-column: span 2;
 }
-</style> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/components/calculator.blade.php ENDPATH**/ ?>
+</style> <?php /**PATH D:\XAMPP\htdocs\NoteX\resources\views/components/calculator.blade.php ENDPATH**/ ?>

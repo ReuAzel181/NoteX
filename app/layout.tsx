@@ -6,8 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'LearnHub - Student Productivity Suite',
-  description: 'All-in-one productivity app for students featuring calculator, notepad, calendar, flashcards, and group chat.',
+  title: 'NoteX - Futuristic Note-Taking Suite',
+  description: 'Cutting-edge productivity app with smart notes, digital canvas, calculator, and intelligent dictionary. Experience the future of note-taking.',
 }
 
 export default function RootLayout({
