@@ -2,6 +2,8 @@
 
 NoteX is a cutting-edge, all-in-one productivity app designed for modern students and professionals. It combines essential study tools into a sleek, futuristic interface with smooth animations and advanced features, focusing on accessibility and seamless user experience.
 
+<img src="https://github.com/ReuAzel181/NoteX/blob/main/project3.png" styles="width: 700px;">
+
 ## Features
 
 - 🚀 Futuristic UI with smooth animations
