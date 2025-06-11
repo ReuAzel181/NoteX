@@ -488,9 +488,282 @@
                 50% { background-position: 100% 50%; }
                 100% { background-position: 0% 50%; }
             }
+
+            #splash-screen {
+                position: fixed;
+                z-index: 2000;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                background: transparent;
+                transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+            }
+            #splash-screen.hide {
+                opacity: 0;
+                pointer-events: none;
+            }
+            .splash-bg-lively {
+                position: absolute;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                background: linear-gradient(120deg, #e0e7ff 0%, #4f8cff 40%, #7c3aed 70%, #f472b6 100%);
+                background-size: 300% 300%;
+                animation: livelyGradientMove 7s ease-in-out infinite alternate;
+                z-index: 0;
+            }
+            @keyframes livelyGradientMove {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 100% 50%; }
+            }
+            .splash-lines {
+                position: absolute;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 1;
+                pointer-events: none;
+                opacity: 0.7;
+                animation: linesMove 12s linear infinite alternate;
+            }
+            @keyframes linesMove {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-30px); }
+            }
+            .splash-stars {
+                position: absolute;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 1;
+                pointer-events: none;
+            }
+            .splash-stars span {
+                position: absolute;
+                border-radius: 50%;
+                background: #fff;
+                opacity: 0.7;
+                box-shadow: 0 0 8px #4f8cff44, 0 0 16px #7c3aed22;
+                animation: splashStarTwinkle 2.5s infinite alternate;
+            }
+            .splash-stars span:nth-child(1) { width: 4px; height: 4px; left: 12vw; top: 18vh; animation-delay: 0s; }
+            .splash-stars span:nth-child(2) { width: 3px; height: 3px; right: 10vw; top: 22vh; animation-delay: 0.5s; }
+            .splash-stars span:nth-child(3) { width: 2px; height: 2px; left: 30vw; bottom: 20vh; animation-delay: 1s; }
+            .splash-stars span:nth-child(4) { width: 5px; height: 5px; right: 20vw; bottom: 12vh; animation-delay: 1.5s; }
+            .splash-stars span:nth-child(5) { width: 3px; height: 3px; left: 60vw; top: 10vh; animation-delay: 0.8s; }
+            .splash-stars span:nth-child(6) { width: 2px; height: 2px; right: 40vw; bottom: 30vh; animation-delay: 1.2s; }
+            .splash-stars span:nth-child(7) { width: 4px; height: 4px; left: 80vw; top: 40vh; animation-delay: 0.3s; }
+            .splash-stars span:nth-child(8) { width: 3px; height: 3px; right: 60vw; bottom: 15vh; animation-delay: 1.7s; }
+            @keyframes splashStarTwinkle {
+                0%, 100% { opacity: 0.7; }
+                50% { opacity: 1; box-shadow: 0 0 16px #4f8cff88, 0 0 32px #7c3aed44; }
+            }
+            .splash-content {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .splash-logo {
+                margin-bottom: 1.2rem;
+                filter: drop-shadow(0 0 32px #fff8) drop-shadow(0 0 16px #4f8cff66);
+                animation: splashLogoPulseLight 1.2s infinite alternate;
+            }
+            @keyframes splashLogoPulseLight {
+                0% { filter: drop-shadow(0 0 16px #fff4) drop-shadow(0 0 8px #4f8cff33); }
+                100% { filter: drop-shadow(0 0 32px #fff) drop-shadow(0 0 24px #4f8cff99); }
+            }
+            .splash-title-light {
+                font-size: 2rem;
+                font-weight: 800;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.7rem;
+                background: linear-gradient(90deg, #4f8cff, #06b6d4, #7c3aed);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 0 2px 24px #fff8;
+                animation: splashTitleGlowLight 1.2s infinite alternate;
+                text-align: center;
+            }
+            @keyframes splashTitleGlowLight {
+                0% { text-shadow: 0 2px 12px #fff4; }
+                100% { text-shadow: 0 2px 32px #4f8cff88; }
+            }
+            .splash-loading-light {
+                display: flex;
+                gap: 0.3rem;
+                margin-bottom: 0.5rem;
+            }
+            .splash-loading-light .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #4f8cff, #7c3aed, #fff 80%);
+                opacity: 0.8;
+                animation: splashDotLight 1.2s infinite;
+            }
+            .splash-loading-light .dot:nth-child(2) { animation-delay: 0.2s; }
+            .splash-loading-light .dot:nth-child(3) { animation-delay: 0.4s; }
+            @keyframes splashDotLight {
+                0%, 80%, 100% { transform: scale(1); opacity: 0.8; }
+                40% { transform: scale(1.4); opacity: 1; }
+            }
+            .splash-center-card.lively {
+                border-radius: 32px;
+                border: none;
+                box-shadow: 0 8px 48px 0 #7c3aed22, 0 0 0 6px #fff2;
+                background: linear-gradient(135deg, rgba(255,255,255,0.85) 60%, rgba(79,140,255,0.08) 100%);
+                animation: cardGlow 2.5s ease-in-out infinite alternate;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10;
+                padding: 1.7rem 1.5rem 1.2rem 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-width: 320px;
+                max-width: 80vw;
+                margin: 0 auto;
+                backdrop-filter: blur(8px);
+            }
+            @keyframes cardGlow {
+                0% { box-shadow: 0 8px 48px 0 #7c3aed22, 0 0 0 6px #fff2; }
+                100% { box-shadow: 0 8px 64px 0 #4f8cff33, 0 0 0 12px #f472b622; }
+            }
+            .splash-subtitle {
+                color: #5b5b7a;
+                font-size: 1.13rem;
+                font-weight: 400;
+                margin-bottom: 2.3rem;
+                text-align: center;
+            }
+            .splash-features {
+                display: flex;
+                gap: 1.2rem;
+                margin-bottom: 1.5rem;
+                padding-top: 0.3rem;
+            }
+            .splash-feature-card.lively {
+                border-radius: 32px;
+                border: 1.5px solid rgba(255,255,255,0.35);
+                background: rgba(255,255,255,0.18);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 2px 16px 0 #4f8cff11, 0 0 0 3px #fff2;
+                animation: featureGlow 2.5s ease-in-out infinite alternate;
+                padding: 1.3rem 1.1rem 1rem 1.1rem;
+                min-width: 150px;
+                max-width: 200px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                box-sizing: border-box;
+                margin-bottom: 1.2rem;
+            }
+            .feature-icon {
+                font-size: 2.7rem;
+                margin-bottom: 1.2rem;
+                color: #7c3aed;
+                background: linear-gradient(135deg, #4f8cff, #7c3aed);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                font-weight: 700;
+            }
+            .feature-title {
+                font-weight: 700;
+                font-size: 1.22rem;
+                margin-bottom: 0.5rem;
+                color: #23244a;
+                text-align: center;
+            }
+            .feature-desc {
+                color: #5b5b7a;
+                font-size: 1.01rem;
+                font-weight: 400;
+                text-align: center;
+                line-height: 1.7;
+            }
         </style>
     </head>
     <body>
+        <!-- Futuristic Splash Screen -->
+        <div id="splash-screen" aria-hidden="true">
+            <div class="splash-bg-lively"></div>
+            <svg class="splash-lines" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#4f8cff" stop-opacity="0.18"/>
+                        <stop offset="100%" stop-color="#e0e7ff" stop-opacity="0.05"/>
+                    </linearGradient>
+                    <linearGradient id="lineGrad2" x1="1" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.13"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.07"/>
+                    </linearGradient>
+                </defs>
+                <line x1="0" y1="200" x2="1920" y2="400" stroke="url(#lineGrad1)" stroke-width="16"/>
+                <line x1="0" y1="600" x2="1920" y2="900" stroke="url(#lineGrad2)" stroke-width="12"/>
+                <line x1="0" y1="1000" x2="1920" y2="1080" stroke="url(#lineGrad1)" stroke-width="8"/>
+            </svg>
+            <div class="splash-stars">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="splash-center-card lively">
+                <div class="splash-logo">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <defs>
+                            <radialGradient id="logo-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                                <stop offset="0%" stop-color="#fff" stop-opacity="0.7"/>
+                                <stop offset="100%" stop-color="#4f8cff" stop-opacity="0.1"/>
+                            </radialGradient>
+                            <linearGradient id="logo-gradient-light" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#4f8cff"/>
+                                <stop offset="0.5" stop-color="#06b6d4"/>
+                                <stop offset="1" stop-color="#f472b6"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="40" cy="40" r="36" fill="url(#logo-glow)"/>
+                        <rect x="12" y="12" width="56" height="56" rx="16" fill="url(#logo-gradient-light)"/>
+                        <rect x="26" y="26" width="28" height="28" rx="7" fill="#fff"/>
+                        <circle id="orbit-comet" cx="40" cy="12" r="4" fill="#fff"/>
+                    </svg>
+                </div>
+                <div class="splash-title-light">Welcome to NoteX!</div>
+                <div class="splash-subtitle">Your futuristic note-taking and productivity suite</div>
+                <div class="splash-features">
+                    <div class="splash-feature-card lively">
+                        <div class="feature-icon"><i class="fas fa-sticky-note"></i></div>
+                        <div class="feature-title">Notes</div>
+                        <div class="feature-desc">Create and organize your notes with ease</div>
+                    </div>
+                    <div class="splash-feature-card lively">
+                        <div class="feature-icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="feature-title">Digital Canvas</div>
+                        <div class="feature-desc">Sketch and visualize your ideas</div>
+                    </div>
+                    <div class="splash-feature-card lively">
+                        <div class="feature-icon"><i class="fas fa-book"></i></div>
+                        <div class="feature-title">Dictionary</div>
+                        <div class="feature-desc">Look up word definitions instantly</div>
+                    </div>
+                    <div class="splash-feature-card lively">
+                        <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+                        <div class="feature-title">Calculator</div>
+                        <div class="feature-desc">Perform quick calculations anytime</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Splash Screen -->
+
         <!-- Floating Particles -->
         <div class="floating-particle"></div>
         <div class="floating-particle"></div>
@@ -725,6 +998,34 @@
                     }
                 }
             }
+
+            // Splash screen logic
+            window.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    document.getElementById('splash-screen').classList.add('hide');
+                }, 2200);
+
+                // Orbit comet animation
+                const comet = document.getElementById('orbit-comet');
+                let angle = 0;
+                function animateComet() {
+                    angle += 2;
+                    if (angle > 360) angle = 0;
+                    const rad = angle * Math.PI / 180;
+                    const r = 28;
+                    const cx = 40 + r * Math.sin(rad);
+                    const cy = 40 - r * Math.cos(rad);
+                    comet.setAttribute('cx', cx);
+                    comet.setAttribute('cy', cy);
+                    requestAnimationFrame(animateComet);
+                }
+                animateComet();
+
+                // Allow manual skip
+                document.getElementById('splash-cta-btn').onclick = function() {
+                    document.getElementById('splash-screen').classList.add('hide');
+                };
+            });
         </script>
     </body>
 </html> <?php /**PATH D:\XAMPP\htdocs\LearnHub\resources\views/welcome.blade.php ENDPATH**/ ?>
